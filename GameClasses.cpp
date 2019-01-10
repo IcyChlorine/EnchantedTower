@@ -3,6 +3,7 @@
 #include<fstream>
 #include<sstream>
 #include<map>
+#include<conio.h>
 using std::ifstream;
 using std::stringstream;
 using std::map;
@@ -236,7 +237,7 @@ void Fade()
 		setfillcolor(HSVtoRGB(0.0f, 0.0f, sqrt(i)));
 		solidrectangle(0, 0, 1024, 768);
 		//system("pause");
-		Sleep(80);
+		if(!kbhit())Sleep(20);
 	}
 	setrop2(R2_COPYPEN);
 }
@@ -262,12 +263,13 @@ void Plot::Play()
 		{
 			settextcolor(HSVtoRGB(0.0f, 0.0f, t));
 			outtextxy(75, y, str.c_str());
-			Sleep(80);
+			if (!kbhit()) Sleep(20);
 		}
 		y += 50;
-		Sleep(400);
+		if (!kbhit()) Sleep(400);
 	}
 	system("pause");
+	Fade();
 }
 istream& operator >> (istream& in, Plot& p)
 {

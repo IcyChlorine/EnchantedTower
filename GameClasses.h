@@ -434,14 +434,14 @@ public:
 	void PlayEndPlot() { end_plot.Play(); }
 	void TryPlayPlotAt(int f,int x,int y)
 	{
-		for (auto p : plots)
+		for (auto& p : plots)
 		{
 			if (p.x == x && p.y == y && p.f == f)
 			{
 				p.Play();
 				swap(p, plots.back());
 				plots.pop_back();
-				break;
+				return;
 			}
 		}
 	}

@@ -72,23 +72,26 @@ void Game::Menu()
 	system("pause");
 	//cleardevice();
 }
+
 void Game::MainGameLoop()
 {
+	//初始化
+	//初始化剧情
 	PlotManager p_mng;
 	p_mng.LoadFrom("plots.txt");
 	p_mng.PlayBeginPlot();
-
-
+	//初始化地图
 	GameMap theMap{ "cs_map.txt" };
 	theMap.SetPos(300, 50);
 	theMap.Render();
-
+	//初始化玩家状态栏
 	PlayerStatBar bar_player_stat{ theMap.GetPlayer() };
 	bar_player_stat.SetPos(50, 50);
 	bar_player_stat.Render();
 
-	while (true)
+	while (true)//主循环
 	{
+		//获取输入
 		char c{ (char)_getch() };
 		if (GetAsyncKeyState(VK_UP)){getch(); c = 'w';}
 		if (GetAsyncKeyState(VK_LEFT)) {getch(); c = 'a';}
@@ -112,7 +115,7 @@ void Game::MainGameLoop()
 			continue;
 		}
 
-		p_mng.TryPlayPlotAt(player.floor, player.x, player.y);
+		p_mng.TryPlayPlotAt(player.floor, player.x+dx, player.y+dy);
 		GameObject* ptarget{ &theMap.at(player.x + dx, player.y + dy) };
 		if (ptarget->GetKind() == "ground")
 		{

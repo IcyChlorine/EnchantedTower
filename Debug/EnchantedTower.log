@@ -1,27 +1,16 @@
-﻿  Monster.cpp
-Monster.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+﻿  main.cpp
 c:\李辰剑\programming\计算概论b作业\大作业-魔塔\enchantedtower\Monster.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-c:\李辰剑\programming\计算概论b作业\大作业-魔塔\enchantedtower\Monster.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  main.cpp
-c:\李辰剑\programming\计算概论b作业\大作业-魔塔\enchantedtower\Monster.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-main.cpp(93): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\conio.h(452): note: 参见“getch”的声明
-main.cpp(94): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\conio.h(452): note: 参见“getch”的声明
-main.cpp(95): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\conio.h(452): note: 参见“getch”的声明
 main.cpp(96): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\conio.h(452): note: 参见“getch”的声明
-main.cpp(220): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-main.cpp(221): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-main.cpp(242): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-main.cpp(243): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
-  GameClasses.cpp
-c:\李辰剑\programming\计算概论b作业\大作业-魔塔\enchantedtower\Monster.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-GameClasses.cpp(39): warning C4018: “<”: 有符号/无符号不匹配
-GameClasses.cpp(236): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-GameClasses.cpp(263): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-  正在生成代码...
-  LINK : 缺少程序数据库 C:\李辰剑\Programming\计算概论B作业\大作业-魔塔\EnchantedTower\Debug\EnchantedTower.pdb；正在执行完全链接
+main.cpp(97): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\conio.h(452): note: 参见“getch”的声明
+main.cpp(98): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\conio.h(452): note: 参见“getch”的声明
+main.cpp(99): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\conio.h(452): note: 参见“getch”的声明
+main.cpp(223): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+main.cpp(224): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+main.cpp(245): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+main.cpp(246): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
   EnchantedTower.vcxproj -> C:\李辰剑\Programming\计算概论B作业\大作业-魔塔\EnchantedTower\Debug\EnchantedTower.exe
   EnchantedTower.vcxproj -> C:\李辰剑\Programming\计算概论B作业\大作业-魔塔\EnchantedTower\Debug\EnchantedTower.pdb (Full PDB)
