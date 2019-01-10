@@ -1,0 +1,129 @@
+// 约定一下地图文件的格式
+// 1 读入的单位是行。
+// 2 “//”开头的行是注释
+// 3 理论上，当遇到不正确的地图文件时，应该报错
+//
+// 4 文件由若干段组成，每一个段以单独的、只有一个“*”的一行结束
+// 5 一下段落格式有文法给出 “+”号意味着空格
+//
+// 5 第一段 地图基本数据
+// segment=floor+width+height=int+int+int
+// 分别是地图的层数，宽度和高度
+//
+// 6 第二段 主角的初始数据
+// setment=coodinate+statistics+key_num=line+line+line
+// coodinate=floor+x+y=int+int+int
+// statistics=HP+attack+defense=int+int+int
+// key_num=yellow_key_num+red_key_num+blue_key_num
+//
+// 7 第三段 指定怪物的数据
+// segment=line+segment=lines 
+// line=string+int+int+int
+// 由若干行组成，每一行先后记录了怪物的 名字，血量，攻击和防御
+// 怪物的名字也意味着怪物资源的存放位置：
+// src_filepath="src\\"+name+".jpg"
+// mask_filepath="src"+name+"_mase.jpt"
+//
+// 8 第四段 地图上墙的位置
+// segment=line+segment=lines 
+// line=int+int+int
+// 每一行指定一块墙，分别是floor,x,y三个坐标
+//
+// 9 第五段 地图上楼梯的位置
+// segment=line+segment=lines
+// line=coodinate+coodinate=(int+int+int)+(int+int+int)
+// 每行指定一个楼梯，先是楼梯的位置，然后是楼梯传送到的目的地
+// 
+// 10 第六段 地图上门的位置
+// segment=line+segment=lines 
+// line=coodinate+kind=(int+int+int)+string
+// 这里string=yellow/red/blue
+//
+// 11 第七段 地图上道具的数据
+// segment=line+segment=lines
+// line=coodinate+kind+effect=(int+int+int)+string+int
+//
+// 12 第八段 怪物的数据
+// segment=line+segment=lines
+// line=coodinate+name=(int+int+int)+string
+// 怪物的坐标，怪物的名字
+//
+// 13 第九段 地图的boss数据
+// 只需给出boss的坐标
+// segment=coodinate=int+int+int
+
+//地图基本数据
+2 12 12
+*
+
+//玩家数据
+0 5 5 1000 20 15 3 1 0
+*
+
+//怪物数据
+blue_slime 100 21 10
+funny 1 1 1
+Von_renjie 10000 300 100
+book 700 25 4
+*
+
+//墙
+0 11 11
+0 0 0
+0 0 11
+0 11 0
+1 4 4
+1 4 6
+1 4 7
+1 4 8
+1 4 9
+1 4 10
+1 4 11
+1 5 4
+1 6 4
+1 7 4
+1 8 4
+1 9 4
+1 10 4
+1 11 4
+*
+
+//楼梯
+0 9 3  1 2 3
+1 3 3  0 8 3
+*
+
+//门的位置
+0 1 1 yellow
+0 1 2 red
+0 1 3 blue
+1 4 5 blue
+*
+
+//道具的位置
+0 1 4 sword 200
+0 1 5 shield 950
+0 1 6 potion 200
+0 1 7 adv_potion 2500
+0 5 1 yellow_key 0
+0 5 2 red_key 0
+0 5 3 blue_key 0
+*
+
+//怪物的数据
+1 7 7 Von_renjie
+1 7 6 book
+1 6 7 book
+1 7 8 book
+1 8 7 book
+1 6 6 book
+1 8 8 book
+1 6 8 book
+1 8 6 book
+0 3 3 blue_slime
+0 3 4 funny
+*
+
+//boss坐标
+1 7 7
+*
