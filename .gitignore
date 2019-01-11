@@ -34,6 +34,8 @@
 # Databases
 *.db
 *.pdb
+*.idb
+*.opendb
 
 #Other Weird VS-related but useless files
 *.tlog
