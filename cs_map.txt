@@ -11,6 +11,7 @@ blue_slime 50 15 2
 funny 20 10 0
 Von_renjie 10000 300 100
 book 100 15 10
+
 *
 
 //墙
@@ -114,6 +115,19 @@ book 100 15 10
 1 6 5
 1 5 5
 1 4 5
+1 9 11
+1 10 11
+1  8 6
+1 10 9
+1 10 8
+1 10 7
+1 11 7
+1 7 1
+1 9 0
+1 9 1
+1 11 2
+1 10 5
+1 11 5
 
 *
 
@@ -129,6 +143,10 @@ book 100 15 10
 1 2 6 yellow
 1 4 11 blue
 1 8 10 blue
+1 10 10 red
+1 10 2 blue
+1 4 4 red
+1 8 7 yellow
 *
 
 //道具的位置
@@ -148,7 +166,14 @@ book 100 15 10
 1 0 8 blue_key 0
 1 7 11 potion 50
 1 5 9 potion 50
+1 5 4 potion 50
+1 6 4 potion 50
+1 11 8 potion 50
 1 7 9  red_key 0
+1 11 11 yellow_key 0
+1 11 9 shield 7
+1 7 4  shield 7
+1 11 0  red_key 0
 *
 
 //怪物的数据
@@ -167,7 +192,11 @@ book 100 15 10
 1 6 11 blue_slime
 1 6 9 funny
 1 2 3 blue_slime
-
+1 6 2 funny
+1 2 3 funny
+1 10 0 book
+1 10 1 book
+1 11 1 book
 *
 
 //boss坐标
