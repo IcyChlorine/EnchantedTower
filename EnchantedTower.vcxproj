@@ -100,10 +100,12 @@
     <ClCompile Include="GameClasses.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="WidgedClasses.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameClasses.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="WidgetClasses.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

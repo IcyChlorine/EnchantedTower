@@ -4,7 +4,6 @@
 #include<fstream>
 #include<sstream>
 
-
 #pragma comment( lib, "msimg32.lib")
 #pragma comment( lib, "winmm.lib")
 #include "mmsystem.h"//导入声音头文件 
@@ -14,6 +13,7 @@ void InitImages();
 void InitGame();
 void Menu();
 void MainGameLoop();
+bool Fight(Player& player, Monster& monster);
 }
 
 int main() 
@@ -72,7 +72,6 @@ void Game::Menu()
 	system("pause");
 	//cleardevice();
 }
-
 void Game::MainGameLoop()
 {
 	//初始化
@@ -205,6 +204,7 @@ void Game::MainGameLoop()
 		EndBatchDraw();
 	}
 }
+
 string str(int num)
 {
 	ostringstream ss;

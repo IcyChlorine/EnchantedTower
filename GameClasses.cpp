@@ -4,22 +4,11 @@
 #include<sstream>
 #include<map>
 #include<conio.h>
-using std::ifstream;
-using std::stringstream;
-using std::map;
 
 namespace Game {
+
 map<string, IMAGE> img_src;
-/*GameObject::GameObject(std::string kind, IMAGE* pimg) :kind{ kind } 
-{
-	this->pimg = new IMAGE;
-	SetImage(pimg); 
-}
-GameObject::GameObject(string kind, string src_filepath) :kind{ kind } 
-{
-	pimg = new IMAGE;
-	SetImage(src_filepath);
-}*/
+
 GameObject& GameMap::at(int x, int y,int floor)
 {
 	if (floor == -1)floor = cur_floor;
