@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Databases
+*.db
+*.pdb
+
+#Other Weird VS-related but useless files
+*.tlog
+*.lastbuildstate
+*.ilk
+*.log
