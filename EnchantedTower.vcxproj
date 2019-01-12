@@ -98,12 +98,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameClasses.cpp" />
+    <ClCompile Include="Handbook.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="WidgedClasses.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameClasses.h" />
+    <ClInclude Include="Handbook.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="WidgetClasses.h" />
   </ItemGroup>

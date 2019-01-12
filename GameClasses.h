@@ -174,6 +174,7 @@ private:
 	bool able{ false }; // able to fight agianst
 };
 
+class Card;
 class GameMap:public Widget
 {
 private:
@@ -189,6 +190,12 @@ public:
 	GameMap(string finename);
 	~GameMap();
 	void LoadFrom(string filename);
+	void SaveAs(string filename);
+
+	int GetWidth() { return  width; };
+	int GetHeight() { return  height; };
+
+	vector<Card*>  GetMonster();
 
 	Player& GetPlayer() {
 		Player* p = (Player*)data[_GetHashedIndex(player_x, player_y, player_f)];
@@ -253,6 +260,40 @@ public:
 		}
 	}
 		
+};
+
+class Card : public Container {
+private:
+	int display_wide{ 3 };
+	Text text_name{ 50, 0, "???" };
+	Text text_HP{ 50, 50, "生命值 ???" };
+	Text text_attack{ 260, 0, "攻击力 ???" };
+	Text text_defense{ 260, 50, "防御力 ???" };
+	Image img_monster{ "Von_renjie_mask" }; // Default picture
+public:
+	string name{ "Undefined" };
+
+	void SetCard(Game::Monster *);
+	void SetName(string new_name) { name = new_name; }
+
+	Card() {
+		img_monster.SetPos(-15, 10);
+		AttachWidget(&text_name);
+		AttachWidget(&text_HP);
+		AttachWidget(&text_attack);
+		AttachWidget(&text_defense);
+		AttachWidget(&img_monster);
+	};
+};
+class Handbook : public Container {
+private:
+	vector<Card *> Cardlist;
+	Text text_title{ 385, 30, "怪 物 手 册" };
+public:
+	explicit Handbook(vector<Card *>&);
+	~Handbook() { for (auto card : Cardlist) delete(card); }
+
+	void Refresh(vector<Card *>&);
 };
 
 class PlayerStatBar:public Container
@@ -324,6 +365,7 @@ public:
 class Plot
 {
 	friend istream& operator >> (istream& in, Plot& p);
+	friend ostream& operator << (ostream& out, Plot& p);
 	friend class PlotManager;
 private:
 	//触发条件
@@ -352,6 +394,15 @@ public:
 			if (p.GetKind() == "begin" || p.GetKind() == "start")begin_plot = p;
 			else if (p.GetKind() == "end" || p.GetKind() == "finish")end_plot = p;
 			else plots.push_back(p);
+		}
+	}
+	void SaveAs(string filename)
+	{
+		ofstream fout{ filename };
+		fout << begin_plot << endl << end_plot << endl;
+		for (Plot p : plots)
+		{
+			fout << p << endl;
 		}
 	}
 	void PlayBeginPlot() { begin_plot.Play(); }

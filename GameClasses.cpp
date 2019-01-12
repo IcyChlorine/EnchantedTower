@@ -1,8 +1,10 @@
 #include"GameClasses.h"
 #include<iostream>
+#include<iomanip>
 #include<fstream>
 #include<sstream>
 #include<map>
+#include<set>
 #include<conio.h>
 
 namespace Game {
@@ -111,8 +113,8 @@ void GameMap::LoadFrom(string filename)
 		//init object
 		Stair* pstair = new Stair{ x_to,y_to,f_to,f_to<f };
 
-		//substitutey
-		delete data[_GetHashedIndex(x, y, f)];
+		//substitute
+ 		delete data[_GetHashedIndex(x, y, f)];
 		data[_GetHashedIndex(x, y, f)] = pstair;
 	}
 
@@ -187,6 +189,206 @@ void GameMap::LoadFrom(string filename)
 
 	fin.close();
 }
+
+//zq编写 必属精品
+void GameMap::SaveAs(string filename) {
+
+	ofstream fout{ filename };
+
+	fout << floors << " " << width << " " << height << endl;
+	fout << "*" << endl;
+
+	Player player = GetPlayer();
+	fout << player_f << " " << player_x << " " << player_y << " ";
+	fout << player.GetStat("HP") << " " << player.GetStat("attack") << " " << player.GetStat("defense") << " ";
+	fout << player.GetStat("yellow_key_num") << " " << player.GetStat("red_key_num") << " " << player.GetStat("blue_key_num") << endl;
+	fout << "*" << endl;
+
+
+	set<string> s;
+	for (int k = 0; k < floors*height*width; ++k)
+	{
+		int h = k / (height*width);
+		int a1 = k % (height*width);
+		int y = a1 / width;
+		int x = a1 % width;
+		GameObject&Q = *data[_GetHashedIndex(x, y, h)];
+		if (Q.GetKind() == "monster")
+		{
+			Monster* pmonster = (Monster*)data[_GetHashedIndex(x, y, h)];
+			if (!s.count(pmonster->name)) {
+				fout << pmonster->name << " " << pmonster->HP << " " << pmonster->read_atk() << " " << pmonster->read_dfs() << " " << endl;
+				
+				s.insert(pmonster->name);
+			}
+		}
+	}
+	fout << "*" << endl;
+
+	for (int k = 0; k < floors*height*width; ++k)
+	{
+		int h = k / (height*width);
+		int a1 = k % (height*width);
+		int y = a1 / width;
+		int x = a1 % width;
+		GameObject&Q = *data[_GetHashedIndex(x, y, h)];
+		if (Q.GetKind() == "wall")
+		{
+			fout << h << " " << x << " " << y << endl;	
+		}
+	}
+	fout << "*" << endl;
+
+	for (int k = 0; k < floors*height*width; ++k)
+	{
+		int h = k / (height*width);
+		int a1 = k % (height*width);
+		int y = a1 / width;
+		int x = a1 % width;
+		GameObject&Q = *data[_GetHashedIndex(x, y, h)];
+		if (Q.GetKind() == "stair")
+		{
+			Stair* pstair = (Stair*)data[_GetHashedIndex(x, y, h)];
+			fout << h << " " << x << " " << y << " " << pstair->GetTargetFloor() << " " << pstair->GetTargetX() << " " << pstair->GetTargetY() << endl;
+		}
+	}
+	fout << "*" << endl;
+
+	for (int k = 0; k < floors*height*width; ++k)
+	{
+		int h = k / (height*width);
+		int a1 = k % (height*width);
+		int y = a1 / width;
+		int x = a1 % width;
+		GameObject&Q = *data[_GetHashedIndex(x, y, h)];
+		if (Q.GetKind() == "door")
+		{
+			Door* pdoor = (Door*)data[_GetHashedIndex(x, y, h)];
+			fout << h << " " << x << " " << y << " " << pdoor->GetColor() << endl;
+		}
+	}
+	fout << "*" << endl;
+
+	for (int k = 0; k < floors*height*width; ++k)
+	{
+		int h = k / (height*width);
+		int a1 = k % (height*width);
+		int y = a1 / width;
+		int x = a1 % width;
+		GameObject&Q = *data[_GetHashedIndex(x, y, h)];
+		if (Q.GetKind() == "item")
+		{
+			Item* pitem = (Item*)data[_GetHashedIndex(x, y, h)];
+			fout << h << " " << x << " " << y << " " << pitem->GetMinorKind() << " " << pitem->GetEffect() << endl;
+		}
+	}
+	fout << "*" << endl;
+
+	for (int k = 0; k < floors*height*width; ++k)
+	{
+		int h = k / (height*width);
+		int a1 = k % (height*width);
+		int y = a1 / width;
+		int x = a1 % width;
+		GameObject&Q = *data[_GetHashedIndex(x, y, h)];
+		if (Q.GetKind() == "monster")
+		{
+			Monster* pmonster = (Monster*)data[_GetHashedIndex(x, y, h)];
+			fout << h << " " << x << " " << y << " " << pmonster->name << endl;
+		}
+	}
+	fout << "*" << endl;
+
+	fout << boss_f << " " << boss_x << " " << boss_y << endl;
+	fout << "*" << endl;
+}
+
+
+bool is_new_card(const vector<Card *> &Cardlist, Game::Monster *pmonster) {
+	for (Card *loadedCard : Cardlist) {
+		if (loadedCard->name == pmonster->name) return false;
+	}
+	return true;
+}
+vector<Card*> GameMap::GetMonster() {
+	vector<Card *> Cardlist;
+	// Go through this floor.
+	for (int x = 0; x != width; ++x)
+	{
+		for (int y = 0; y != height; ++y)
+		{
+			Game::GameObject* piterator{ &at(x, y,cur_floor) };
+			if (piterator->GetKind() == "monster")
+			{
+				Game::Monster* pmonster{ dynamic_cast<Monster*>(piterator) };// COPY ITERATOR
+				if (!is_new_card(Cardlist, pmonster)) continue;
+				// A new monster
+				Card *pcard{ new Card{} }; // default status: cannot fight
+				if (pmonster->try_fight(GetPlayer().GetStat("HP"),
+					GetPlayer().GetStat("atk"), GetPlayer().GetStat("dfs")))
+					// Able to fight. Show its data.
+				{
+					pcard->SetCard(pmonster);
+				}
+				else
+					pcard->SetName(pmonster->name);
+				Cardlist.push_back(pcard);
+			}
+		}
+	}
+	return Cardlist;
+}
+
+void Card::SetCard(Game::Monster *pmonster) {
+	name = pmonster->name;
+	{
+		ostringstream ss;
+		ss << "攻击力 " << setw(display_wide) << pmonster->read_atk();
+		text_attack.SetText(ss.str());
+	}
+	{
+		ostringstream ss;
+		ss << "防御力 " << setw(display_wide) << pmonster->read_dfs();
+		text_defense.SetText(ss.str());
+	}
+	{
+		ostringstream ss;
+		ss << "生命值 " << setw(display_wide) << pmonster->HP;
+		text_HP.SetText(ss.str());
+	}
+	text_name.SetText(name);
+	img_monster.SetImage(name);
+	img_monster.SetMask(name + "_mask");
+}
+
+Handbook::Handbook(vector<Game::Card *>& initCardlist) : Cardlist{ initCardlist }
+{
+	text_title.SetSize(40);
+	AttachWidget(&text_title);
+	int on_left{ 0 };
+	for (auto card : initCardlist)
+	{// 2 Card per row. x change via %, y change via row width multiples a half on_left.
+		dynamic_cast<Widget*>(card)->SetPos(50 + 512 * (on_left % 2), 100 + 100 * (on_left / 2));
+		AttachWidget(dynamic_cast<Widget*>(card));
+		++on_left;
+	}
+}
+void Handbook::Refresh(vector<Game::Card *>& newCardlist)
+{
+	/*for (auto oldcard : Cardlist) delete (oldcard);
+	Cardlist = newCardlist;
+	widgets = {};
+	AttachWidget(&text_title);
+	int on_left{ 0 };
+	for (auto card : newCardlist)
+	{
+		dynamic_cast<Widget*>(card)->SetPos(50 + 512 * (on_left % 2), 100 + 100 * (on_left / 2));
+		AttachWidget(dynamic_cast<Widget*>(card));
+		++on_left;
+	}*/
+	throw runtime_error{ "this function is not implemented" };
+}
+
 void Player::SetStat(string name, int value)
 {
 	if (name == "HP") HP = value;
@@ -252,7 +454,7 @@ void Plot::Play()
 		{
 			settextcolor(HSVtoRGB(0.0f, 0.0f, t));
 			outtextxy(75, y, str.c_str());
-			if (!kbhit()) Sleep(20);
+			if (!kbhit()) Sleep(kind=="game"?20:80);
 		}
 		y += 50;
 		if (!kbhit()) Sleep(400);
@@ -272,5 +474,16 @@ istream& operator >> (istream& in, Plot& p)
 		p.plots.push_back(str);
 	}
 	return in;
+}
+ostream& operator << (ostream& out, Plot& p)
+{
+	out << p.kind;
+	if (p.kind == "game")
+		out << p.f << p.x << p.y;
+	for (string str : p.plots)
+	{
+		out << str << endl;
+	}
+	return out;
 }
 }
